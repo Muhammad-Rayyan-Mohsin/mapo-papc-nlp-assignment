@@ -1,0 +1,34 @@
+{
+  "base_model": "Qwen/Qwen2.5-Math-1.5B-Instruct",
+  "languages": {
+    "en": "English",
+    "zh": "Chinese",
+    "sw": "Swahili",
+    "bn": "Bengali"
+  },
+  "benchmark": "MGSM",
+  "n_eval_per_lang": 25,
+  "per_language": {
+    "en": {
+      "accuracy": 0.88,
+      "correct": 22,
+      "total": 25
+    },
+    "zh": {
+      "accuracy": 0.64,
+      "correct": 16,
+      "total": 25
+    },
+    "sw": {
+      "accuracy": 0.04,
+      "correct": 1,
+      "total": 25
+    },
+    "bn": {
+      "accuracy": 0.04,
+      "correct": 1,
+      "total": 25
+    }
+  },
+  "avg_accuracy": 0.4
+}

@@ -1,0 +1,58 @@
+# MAPO reproduction + PAPC improvement — full configuration
+# Mirrors mapo-repro/configs/config.py (see that file for prose comments).
+
+models:
+  base_model: "Qwen/Qwen2.5-Math-1.5B-Instruct"
+  translator: "facebook/nllb-200-distilled-600M"
+
+# ISO -> [NLLB code, display name]
+languages:
+  en: ["eng_Latn", "English"]
+  zh: ["zho_Hans", "Chinese"]
+  sw: ["swh_Latn", "Swahili"]
+  bn: ["ben_Beng", "Bengali"]
+pivot: "en"
+
+data:
+  n_train_problems: 40
+  k_candidates: 3
+  n_eval_mgsm: 25
+  n_eval_msvamp: 0
+  translate_batch: 8
+  max_pairs_per_problem_lang: 3
+
+# PAPC (v3 contribution): Pivot-Augmented Pair Construction.
+# Set papc.enable=false to reproduce v2 exactly.
+papc:
+  enable: true
+  min_pairs_per_lang: 30
+  max_synthetic_per_lang: 8
+  rejected_per_problem: 1
+
+lora:
+  r: 16
+  alpha: 32
+  dropout: 0.05
+  targets: ["q_proj", "k_proj", "v_proj", "o_proj"]
+
+training:
+  dpo_beta: 0.1
+  lr: 5.0e-6
+  batch_size: 1
+  grad_accum: 8
+  epochs: 1
+  max_prompt_len: 512
+  max_len: 1024
+
+generation:
+  temperature: 0.8
+  top_p: 0.95
+  max_new: 256
+  max_new_eval: 384
+
+nllb:
+  max_src_len: 384
+  max_tgt_len: 384
+
+seed: 42
+n_iterations: 1
